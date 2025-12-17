@@ -150,3 +150,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://your-netlify-site.netlify.app",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://garage-stock-management.netlify.app",
+]
