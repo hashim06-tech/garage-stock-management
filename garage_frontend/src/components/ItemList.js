@@ -7,7 +7,7 @@ function ItemList({ role }) {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const loadItems = () => {
-  fetch("http://127.0.0.1:8000/api/items/", {
+  fetch("https://garage-stock-management.onrender.com/api/items/", {
     headers: {
       "Authorization": "Bearer " + localStorage.getItem("access"),
     },
@@ -27,7 +27,7 @@ function ItemList({ role }) {
 
   if (!confirmDelete) return;
 
-  fetch(`http://127.0.0.1:8000/api/items/${itemId}/`, {
+  fetch(`https://garage-stock-management.onrender.com/api/items/${itemId}/`, {
     method: "DELETE",
     headers: {
       "Authorization": "Bearer " + localStorage.getItem("access"),

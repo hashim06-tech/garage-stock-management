@@ -5,7 +5,7 @@ export async function refreshToken() {
   if (!refresh) return false;
 
   try {
-    const res = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
+    const res = await fetch("https://garage-stock-management.onrender.com", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ refresh }),

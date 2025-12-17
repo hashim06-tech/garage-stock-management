@@ -145,3 +145,8 @@ SIMPLE_JWT = {
 
 ALLOWED_HOSTS = ['*']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://your-netlify-site.netlify.app",
+]
