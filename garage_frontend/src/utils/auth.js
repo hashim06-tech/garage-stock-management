@@ -1,28 +1,45 @@
-export async function refreshToken() {
-  const refresh = localStorage.getItem("refresh");
+const API_URL = "https://garage-stock-management.onrender.com";
 
-  // ✅ If no refresh token, do nothing
-  if (!refresh) return false;
+/**
+ * Login user and get JWT tokens
+ */
+export async function login(username, password) {
+  const response = await fetch(`${API_URL}/api/token/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: username,
+      password: password,
+    }),
+  });
 
-  try {
-    const res = await fetch("https://garage-stock-management.onrender.com", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ refresh }),
-    });
-
-    if (!res.ok) {
-      localStorage.clear();
-      return false;
-    }
-
-    const data = await res.json();
-    localStorage.setItem("access", data.access);
-    return true;
-
-  } catch (error) {
-    // ✅ IMPORTANT: prevent app crash
-    console.error("Refresh token failed:", error);
-    return false;
+  if (!response.ok) {
+    throw new Error("Invalid username or password");
   }
+
+  return await response.json();
+}
+
+/**
+ * Logout user
+ */
+export function logout() {
+  localStorage.removeItem("access");
+  localStorage.removeItem("refresh");
+}
+
+/**
+ * Get access token
+ */
+export function getAccessToken() {
+  return localStorage.getItem("access");
+}
+
+/**
+ * Check if user is logged in
+ */
+export function isLoggedIn() {
+  return !!localStorage.getItem("access");
 }
