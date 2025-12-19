@@ -24,8 +24,8 @@ function ItemForm({ selectedItem, onSaved }) {
     e.preventDefault();
 
     const url = selectedItem
-      ? `https://garage-stock-management.onrender.com/api/items/${selectedItem.id}/`
-      : "https://garage-stock-management.onrender.com/api/items/";
+      ? `http://127.0.0.1:8000/api/items/${selectedItem.id}/`
+      : "http://127.0.0.1:8000/api/items/";
 
     const method = selectedItem ? "PUT" : "POST";
 

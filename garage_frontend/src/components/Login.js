@@ -8,7 +8,7 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://garage-stock-management.onrender.com", {
+      const res = await fetch("https://garage-stock-management.onrender.com/api/token/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),

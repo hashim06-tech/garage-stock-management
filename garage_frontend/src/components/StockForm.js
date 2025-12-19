@@ -7,7 +7,7 @@ function StockForm({ onUpdate }) {
   const [quantity, setQuantity] = useState("");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/items/")
+    fetch("https://garage-stock-management.onrender.com/api/items/")
       .then(res => res.json())
       .then(data => setItems(data));
   }, []);
@@ -15,7 +15,7 @@ function StockForm({ onUpdate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://127.0.0.1:8000/api/stocklogs/", {
+    fetch("https://garage-stock-management.onrender.com/api/stocklogs/", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",

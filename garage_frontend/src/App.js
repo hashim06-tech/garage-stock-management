@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItemList from "./components/ItemList";
 import Login from "./components/Login";
-
+import { refreshToken } from "./utils/auth";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -19,7 +19,13 @@ function App() {
         return;
       }
 
-      
+      const ok = await refreshToken();
+      if (!ok) {
+        localStorage.clear();
+        setLoggedIn(false);
+        setLoading(false);
+        return;
+      }
 
       try {
         const res = await fetch("http://127.0.0.1:8000/api/me/", {

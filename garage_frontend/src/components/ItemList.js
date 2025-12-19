@@ -7,7 +7,7 @@ function ItemList({ role }) {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const loadItems = () => {
-  fetch("https://garage-stock-management.onrender.com/api/items/", {
+  fetch("http://127.0.0.1:8000/api/items/", {
     headers: {
       "Authorization": "Bearer " + localStorage.getItem("access"),
     },
@@ -15,6 +15,7 @@ function ItemList({ role }) {
     .then(res => res.json())
     .then(data => setItems(data));
 };
+
 
   useEffect(() => {
     loadItems();
@@ -38,7 +39,7 @@ function ItemList({ role }) {
       loadItems(); // refresh list
     })
     .catch(() => alert("Unable to delete item"));
-  };
+};
 
   return (
     <div>
@@ -51,7 +52,6 @@ function ItemList({ role }) {
     }}
   />
 )}
-
 
       <StockForm onUpdate={loadItems} />
 
@@ -80,7 +80,6 @@ function ItemList({ role }) {
     <span className="badge bg-success">OK</span>
   )}
 </td>
-
               <td>
   {role === "Owner" && (
     <>
