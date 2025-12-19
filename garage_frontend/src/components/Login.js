@@ -23,6 +23,7 @@ function Login({ onLogin }) {
       const data = await res.json();
       localStorage.setItem("access", data.access);
       localStorage.setItem("refresh", data.refresh);
+      window.location.reload();
       onLogin();
 
     } catch (error) {
