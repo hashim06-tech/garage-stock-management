@@ -6,16 +6,25 @@ function ItemList({ role }) {
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const loadItems = () => {
-  fetch("http://127.0.0.1:8000/api/items/", {
-    headers: {
-      "Authorization": "Bearer " + localStorage.getItem("access"),
-    },
-  })
-    .then(res => res.json())
-    .then(data => setItems(data));
-};
+  const loadItems = async () => {
+  try {
+    const res = await fetch(`${API_URL}/api/items/`, {
+      headers: {
+        Authorization: "Bearer " + getAccessToken(),
+      },
+    });
 
+    if (!res.ok) {
+      console.error("Failed to load items:", res.status);
+      return;
+    }
+
+    const data = await res.json();
+    setItems(data);
+  } catch (error) {
+    console.error("Error loading items:", error);
+  }
+};
 
   useEffect(() => {
     loadItems();
