@@ -1,15 +1,17 @@
-from rest_framework import viewsets
-from .models import Item, StockLog
-from .serializers import ItemSerializer, StockLogSerializer
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsOwner
+from .models import Item
+from .serializers import ItemSerializer
 
-class ItemViewSet(viewsets.ModelViewSet):
+class ItemViewSet(ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
 
-
-class StockLogViewSet(viewsets.ModelViewSet):
-    queryset = StockLog.objects.all().order_by('-timestamp')
-    serializer_class = StockLogSerializer
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [IsAuthenticated()]
+        return [IsAuthenticated(), IsOwner()]
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
