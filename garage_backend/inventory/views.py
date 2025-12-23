@@ -9,11 +9,11 @@ class ItemViewSet(ModelViewSet):
     serializer_class = ItemSerializer
 
     def get_permissions(self):
-        # View items: Owner + Mechanic
+        # View items → Owner + Mechanic
         if self.request.method == "GET":
             return [IsAuthenticated()]
 
-        # Modify items: Owner only
+        # Add / Update / Delete → Owner only
         return [IsAuthenticated(), IsOwner()]
 
 
