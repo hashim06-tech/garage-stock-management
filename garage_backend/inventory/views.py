@@ -9,9 +9,13 @@ class ItemViewSet(ModelViewSet):
     serializer_class = ItemSerializer
 
     def get_permissions(self):
+        # View items: Owner + Mechanic
         if self.request.method == "GET":
             return [IsAuthenticated()]
+
+        # Modify items: Owner only
         return [IsAuthenticated(), IsOwner()]
+
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
